@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: cryptovault
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cryptovault
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - cryptonet
+  web:
+    build: .
+    command: gunicorn -b 0.0.0.0:5000 app:create_app() --certfile=certs/server.crt --keyfile=certs/server.key
+    environment:
+      - DATABASE_URL=postgresql://cryptovault:password@db:5432/cryptovault
+      - SECRET_KEY=supersecretkey
+      - AES_KEY=changemechangemechangemechangeme
+      - JWT_PRIVATE_KEY=keys/jwt_private.pem
+      - JWT_PUBLIC_KEY=keys/jwt_public.pem
+      - SSL_CERT=certs/server.crt
+      - SSL_KEY=certs/server.key
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./certs:/app/certs:ro
+      - ./keys:/app/keys:ro
+    networks:
+      - cryptonet
+    user: cryptovault
+volumes:
+  pgdata:
+networks:
+  cryptonet:

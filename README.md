@@ -1,5 +1,7 @@
 # CryptoVault
 
+> **DISCLAIMER:** This project is for demonstration and educational purposes only. It is **NOT** recommended for production use. The code and configuration are intentionally simplified to illustrate cryptographic concepts and may lack the robustness, security hardening, and operational controls required for real-world deployments.
+
 A secure, containerized Flask web application demonstrating real-world cryptography use cases for sensitive data, files, and audit logs.
 
 ## Features
