@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   db:
     image: postgres:15
@@ -13,7 +12,13 @@ services:
       - cryptonet
   web:
     build: .
-    command: gunicorn -b 0.0.0.0:5000 app:create_app() --certfile=certs/server.crt --keyfile=certs/server.key
+    command:
+      - gunicorn
+      - -b
+      - 0.0.0.0:5000
+      - "app.app:create_app()"
+      - --certfile=certs/server.crt
+      - --keyfile=certs/server.key
     environment:
       - DATABASE_URL=postgresql://cryptovault:password@db:5432/cryptovault
       - SECRET_KEY=supersecretkey

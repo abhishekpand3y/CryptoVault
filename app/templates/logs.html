@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Logs | CryptoVault{% endblock %}
+{% block content %}
+<h3>Logs</h3>
+{% if logs %}
+  <table class="table table-striped">
+    <thead><tr><th>Timestamp</th><th>User</th><th>Action</th><th>Details</th></tr></thead>
+    <tbody>
+      {% for log in logs %}
+      <tr>
+        <td>{{ log.timestamp }}</td>
+        <td>{{ log.user_id }}</td>
+        <td>{{ log.action }}</td>
+        <td>{{ log.details }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No logs found.</p>
+{% endif %}
+{% endblock %} 

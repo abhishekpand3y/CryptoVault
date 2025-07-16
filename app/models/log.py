@@ -1,12 +1,11 @@
-from app.models import db
+from app import db
+from sqlalchemy import Column, Integer, String, Text, DateTime, LargeBinary, ForeignKey
 from datetime import datetime
 
 class Log(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    action = db.Column(db.String(64), nullable=False)
-    details = db.Column(db.Text, nullable=True)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    signature = db.Column(db.LargeBinary, nullable=False)
-
-    user = db.relationship('User', backref=db.backref('logs', lazy=True)) 
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=True)
+    action = Column(String(64), nullable=False)
+    details = Column(Text, nullable=True)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    signature = Column(LargeBinary, nullable=False) 

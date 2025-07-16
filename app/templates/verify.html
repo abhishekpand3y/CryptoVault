@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Verify Signature | CryptoVault{% endblock %}
+{% block content %}
+<h3>Verify File Signature</h3>
+{% if message %}
+  <div class="alert alert-info">{{ message }}</div>
+{% endif %}
+{% if signature_valid is not none %}
+  <div class="alert alert-{{ 'success' if signature_valid else 'danger' }}">
+    Signature is {{ 'valid' if signature_valid else 'invalid' }}.
+  </div>
+{% endif %}
+<a href="/crypto/files" class="btn btn-secondary">Back to Files</a>
+{% endblock %} 

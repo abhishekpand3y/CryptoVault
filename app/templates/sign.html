@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Sign File | CryptoVault{% endblock %}
+{% block content %}
+<h3>Sign File</h3>
+{% if message %}
+  <div class="alert alert-info">{{ message }}</div>
+{% endif %}
+{% if signature %}
+  <div class="alert alert-success">
+    <strong>Signature (base64):</strong>
+    <pre>{{ signature }}</pre>
+  </div>
+{% endif %}
+<a href="/crypto/files" class="btn btn-secondary">Back to Files</a>
+{% endblock %} 
